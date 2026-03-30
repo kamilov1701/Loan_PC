@@ -8,13 +8,13 @@ import React, { Component } from 'react'
 import { House } from 'lucide-react';
 import { Users } from 'lucide-react';
 import { User } from 'lucide-react';
-import { Bell } from 'lucide-react';
 import { ChartNoAxesColumn } from 'lucide-react';
 import { Search } from "lucide-react";
 import { Globe } from "lucide-react";
 import { DollarSign } from 'lucide-react';
 import { Check } from 'lucide-react';
-import { Plus } from 'lucide-react';
+import { Plus, Minus, Eye, Pencil, Trash2, Clock } from "lucide-react";
+
 // }
 
 export default class DashboardH extends Component {
@@ -24,7 +24,7 @@ export default class DashboardH extends Component {
         <div>
           <main>
 
-            <section className='border-[#E5E7EB] border'>
+            <section className='border-[#E5E7EB] border px-[28px]'>
               <div className='py-[7px] flex items-center container justify-between '>
                 <div className='flex gap-[5px] items-center'>
                   <h1 className='text-[17px] font-bold'>Bosh sahifa</h1>
@@ -75,11 +75,167 @@ export default class DashboardH extends Component {
                   <button className='text-[#FFFFFF] text-[13px] font-semibold py-[9px] px-[10px] bg-[#2563EB] rounded-[8px] flex gap-[5px] items-center'><Plus />Yangi qarzdor  yaratish</button>
                 </div>
 
-                <div>
-                  <div>
-                    <p className='loannum'>#</p>
-                    <p className="loanlist">Qarzdor</p>
+                <div className="w-full bg-white rounded-xl shadow p-4 space-y-2"><div className="flex text-gray-400 text-sm font-semibold px-4 py-2">
+                  <div className="w-[40px]">#</div>
+                  <div className="w-[250px]">Qarzdor</div>
+                  <div className="w-[180px]">Telefon</div>
+                  <div className="w-[180px]">Qarz summasi</div>
+                  <div className="w-[150px]">Yozilgan sana</div>
+                  <div className="w-[150px]">Keyingi muddat</div>
+                  <div className="w-[150px]">Holati</div>
+                  <div className="flex-1">Amallar</div>
+                </div>
 
+                  <div className="flex items-center px-4 py-3 bg-gray-50 rounded-lg">
+                    <div className="w-[40px]">1</div>
+
+                    <div className="w-[250px] flex items-center gap-2">
+                      <div className="w-8 h-8 flex items-center justify-center text-white rounded-full bg-blue-500">
+                        AK
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Anvar Karimov</p>
+                        <p className="text-xs text-gray-400">ID N° 001</p>
+                      </div>
+                    </div>
+
+                    <div className="w-[180px] text-sm">+998 99 567 12 78</div>
+
+                    <div className="w-[180px] text-sm font-semibold text-red-500">
+                      2 500 000 so'm
+                    </div>
+
+                    <div className="w-[150px] text-sm text-gray-500">01.03.2025</div>
+                    <div className="w-[150px] text-sm text-gray-500">01.06.2025</div>
+
+                    <div className="w-[150px]">
+                      <span className="text-xs px-3 py-1 rounded-full bg-blue-100 text-blue-500">
+                        Aktiv
+                      </span>
+                    </div>
+
+                    <div className="flex gap-3 text-gray-400">
+                      <Plus size={16} className="cursor-pointer" />
+                      <Minus size={16} className="cursor-pointer00" />
+                      <Clock size={16} className="cursor-pointer" />
+                      <Eye size={16} className="cursor-pointer0" />
+                      <Pencil size={16} className="cursor-pointer00" />
+                      <Trash2 size={16} className="cursor-pointer" />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center px-4 py-3 bg-gray-50 rounded-lg">
+                    <div className="w-[40px]">2</div>
+
+                    <div className="w-[250px] flex items-center gap-2">
+                      <div className="w-8 h-8 flex items-center justify-center text-white rounded-full bg-green-500">
+                        DY
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Dinoza Yusupova</p>
+                        <p className="text-xs text-gray-400">ID N° 002</p>
+                      </div>
+                    </div>
+
+                    <div className="w-[180px] text-sm">+998 90 123 45 67</div>
+
+                    <div className="w-[180px] text-sm font-semibold text-red-500">
+                      1 800 000 so'm
+                    </div>
+
+                    <div className="w-[150px] text-sm text-gray-500">15.02.2025</div>
+                    <div className="w-[150px] text-sm text-gray-500">15.05.2025</div>
+
+                    <div className="w-[150px]">
+                      <span className="text-xs px-3 py-1 rounded-full bg-yellow-100 text-yellow-500">
+                        Yaqinlashgan
+                      </span>
+                    </div>
+
+                    <div className="flex gap-3 text-gray-400">
+                      <Plus size={16} className="cursor-pointer" />
+                      <Minus size={16} className="cursor-pointer00" />
+                      <Clock size={16} className="cursor-pointer" />
+                      <Eye size={16} className="cursor-pointer0" />
+                      <Pencil size={16} className="cursor-pointer00" />
+                      <Trash2 size={16} className="cursor-pointer" />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center px-4 py-3 bg-gray-50 rounded-lg">
+                    <div className="w-[40px]">3</div>
+
+                    <div className="w-[250px] flex items-center gap-2">
+                      <div className="w-8 h-8 flex items-center justify-center text-white rounded-full bg-purple-500">
+                        BT
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Bobur Toshmatov</p>
+                        <p className="text-xs text-gray-400">ID N° 003</p>
+                      </div>
+                    </div>
+
+                    <div className="w-[180px] text-sm">+998 91 234 56 78</div>
+
+                    <div className="w-[180px] text-sm font-semibold text-red-500">
+                      5 000 000 so'm
+                    </div>
+
+                    <div className="w-[150px] text-sm text-gray-500">10.01.2025</div>
+                    <div className="w-[150px] text-sm text-gray-500">10.04.2025</div>
+
+                    <div className="w-[150px]">
+                      <span className="text-xs px-3 py-1 rounded-full bg-red-100 text-red-500">
+                        Muddati o'tgan
+                      </span>
+                    </div>
+
+                    <div className="flex gap-3 text-gray-400">
+                      <Plus size={16} className="cursor-pointer" />
+                      <Minus size={16} className="cursor-pointer00" />
+                      <Clock size={16} className="cursor-pointer" />
+                      <Eye size={16} className="cursor-pointer0" />
+                      <Pencil size={16} className="cursor-pointer00" />
+                      <Trash2 size={16} className="cursor-pointer" />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center px-4 py-3 bg-gray-50 rounded-lg">
+                    <div className="w-[40px]">4</div>
+
+                    <div className="w-[250px] flex items-center gap-2">
+                      <div className="w-8 h-8 flex items-center justify-center text-white rounded-full bg-yellow-500">
+                        MR
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">Malika Razzoqova</p>
+                        <p className="text-xs text-gray-400">ID N° 004</p>
+                      </div>
+                    </div>
+
+                    <div className="w-[180px] text-sm">+998 93 345 67 89</div>
+
+                    <div className="w-[180px] text-sm font-semibold text-green-500">
+                      To'langan
+                    </div>
+
+                    <div className="w-[150px] text-sm text-gray-500">05.12.2024</div>
+                    <div className="w-[150px] text-sm text-gray-500">05.03.2025</div>
+
+                    <div className="w-[150px]">
+                      <span className="text-xs px-3 py-1 rounded-full bg-green-100 text-green-500">
+                        To'liq to'langan
+                      </span>
+                    </div>
+
+                    <div className="flex gap-3 text-gray-400">
+                      <Plus size={16} className="cursor-pointer" />
+                      <Minus size={16} className="cursor-pointer00" />
+                      <Clock size={16} className="cursor-pointer" />
+                      <Eye size={16} className="cursor-pointer0" />
+                      <Pencil size={16} className="cursor-pointer00" />
+                      <Trash2 size={16} className="cursor-pointer" />
+                    </div>
                   </div>
                 </div>
               </div>
