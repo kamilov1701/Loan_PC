@@ -13,7 +13,7 @@ export default class PlusLoan extends Component {
         
         <div className='flex justify-between bg-[#FFF] w-full h-[64px] border-b-[1px] solid-[#E5E7EB]'>
           <div className='flex gap-[6px]'>
-            <h1 className='text-[17px] font-bold'>Add Loan</h1>
+            <h1 className='text-[17px] font-bold'>Qarz Qo'shish</h1>
             <h2 className='text-[14px] font-normal'>Anvar Karimov</h2>
           </div>
           <div>
@@ -42,7 +42,7 @@ export default class PlusLoan extends Component {
         {/* Main Card */}
 
         <main>
-          <section className='bg-[#ffff] shadow-lg rounded-xl max-w-[700px] w-full h-[480px] mt-[24px] p-[29px]'>
+          <section className='bg-[#ffff] shadow-lg rounded-xl max-w-[700px] w-full h-[530px] mt-[24px] p-[29px]'>
             <div>
               <p className='text-[#6B7280] text-[19px] font-semibold'>Qarz miqdorini kiriting</p>
             </div>
@@ -57,14 +57,21 @@ export default class PlusLoan extends Component {
             <div className='flex gap-[45px] mt-[16px]'>
               <div>
                 <label className='text-[#111827] text-[21px]' htmlFor="text">Qarz kiritilgan sana</label><br />
-                <input className='max-w-[220px] h-[42px] border-[1px] romded-[8px] py-[11px] px-[15px]' type="date" name="" id="" />
+                <input className='max-w-[220px] h-[42px] border-[1px] rounded-[8px] py-[11px] px-[15px]' type="date" name="" id="" />
               </div>
               <div>
                 <label className='text-[#111827] text-[21px]' htmlFor="text"> To'lash sanasi</label><br />
-                <input className='max-w-[220px] h-[42px] border-[1px] romded-[8px] py-[11px] px-[15px]' type="date" name="" id="" />
+                <input className='max-w-[220px] h-[42px] border-[1px] rounded-[8px] py-[11px] px-[15px]' type="date" name="" id="" />
               </div>
             </div>
-            <div></div>
+            <div className='mt-[16px]'>
+              <label className='text-[#111827] text-[21px]' htmlFor="text">Comment (Ixtiyoriy)</label>
+              <textarea className='max-w-[642px] w-full px-[15px] py-[11px] h-[80px] border-[1px] rounded-[8px] mt-[6px]' name="" id="" placeholder='e.g. Sugar, flour goods...'></textarea>
+            </div>
+            <div className='flex gap-[12px] pt-[26px]'>
+              <button className='w-[114px] h-[36px] bg-[#10B981] rounded-[8px] text-[#fff] text-[14px] font-semibold p-[4px]'><a href="./List">Qarz qo'shish</a></button>
+              <button className='w-[90px] h-[36px] p-[4px] border-[1px] rounded-[8px] text-[14px] font-semibold'><a href="./Dashboard">Bekor qilish</a></button>
+            </div>
           </section>
         </main>
       </div>
