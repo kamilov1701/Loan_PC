@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Plus, Minus, Eye, Pencil, Trash2, Clock, Bell, Funnel, FileText } from "lucide-react";
-import { Globe } from "lucide-react";
 import { Search } from "lucide-react";
 
 
@@ -22,7 +21,7 @@ export default class ListLoan extends Component {
 
           </div>
         </section>
-        <div className='flex items-center justify-between mt-[28px] mb-[20px]'>
+        <div className='flex items-center justify-between mt-[28px] mb-[20px] container'>
           <div className='flex gap-[10px] items-center'>
             <div className="w-[280px] h-[38px] border border-[#E5E7EB] rounded-[10px] flex items-center px-3 bg-white">
               <Search className="w-4 h-4 text-gray-400 mr-2" />
@@ -40,7 +39,7 @@ export default class ListLoan extends Component {
 
           <button className='text-[#FFFFFF] text-[13px] font-semibold py-[9px] px-[10px] bg-[#2563EB] rounded-[8px] flex gap-[5px] items-center'><Plus />Yangi qarzdor  yaratish</button>
         </div>
-        <div className="w-full bg-white rounded-xl shadow p-4 space-y-2"><div className="flex text-gray-400 text-sm font-semibold px-4 py-2">
+        <div className="bg-white rounded-xl shadow p-4 space-y-2"><div className="flex text-gray-400 text-sm font-semibold px-4 py-2">
           <div className="w-[40px]">#</div>
           <div className="w-[250px]">Qarzdor</div>
           <div className="w-[180px]">Telefon</div>
