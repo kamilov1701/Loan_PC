@@ -34,14 +34,14 @@ export default class NewLoanerC extends Component {
           <div>
 
             <div className=' bg-[#FFFFFF] border border-[#0000000A] shadow-[0_1px_3px_0_#0000000F] px-[24px] py-[29px] w-[700px] rounded-[14px]'>
-            <h2 className='text-[#6B7280] text-[13px] font-semibold w-[154px] uppercase'>Qarz oluvchi haqida yangi ma'lumot</h2>
+            <h2 className='text-[#6B7280] text-[13px] font-semibold uppercase'>Qarz oluvchi haqida yangi ma'lumot</h2>
               <div className='flex gap-[24px]'>
                 <div>
                   <h2 className='text-[#111827] text-[12px] font-semibold mt-[10px]'>Rasm yuklash</h2>
                   <div className='border border-[#E5E7EB] w-[309px] text-center flex flex-col items-center justify-center py-[34px] bg-[#F4F6FA] mt-[8px] rounded-[12px]'>
                     <span className='flex flex-col items-center'>
                       <Upload className='text-[#9CA3AF] text-center mb-[10px]' size={36}/>
-                      <h2 className='text-[#111827] text-[13px] font-semibold w-[138px]'>Yuklang yoki suratga oling</h2>
+                      <h2 className='text-[#111827] text-[13px] font-semibold '>Yuklang yoki suratga oling</h2>
                       <h3 className='text-[#9CA3AF] text-[12px] font-normal'>JPG, PNG · Maks. 5MB</h3>
                     </span>
                     <div className='flex gap-[10px] mt-[14px]'>
@@ -77,14 +77,14 @@ export default class NewLoanerC extends Component {
                 </div>
 
                 <div>
-                  <h2 className='text-[#111827] text-[12px] font-semibold mt-[10px] mb-[8px]'>Fotosuratni oldindan ko‘rish</h2>
+                  <h2 className='text-[#111827] text-[12px] font-semibold mt-[10px] mb-[8px]'>Suratni ko‘rish</h2>
                   <div>
                     <div className='flex flex-col items-center w-[220px] bg-[linear-gradient(135deg,#EFF6FF_0%,#DBEAFE_100%)] py-[72px] px-[65px] rounded-[14px] text-center'>
                     <User className='text-[#2563EB]' size={30}/>
-                    <h2 className='text-[#2563EB] text-[13px] font-semibold'>Fotosuratni oldindan ko‘rish</h2>
+                    <h2 className='text-[#2563EB] text-[13px] font-semibold'>Suratni ko‘rish</h2>
                     </div>
                   </div>
-                  <div className='mt-[24px]'>
+                  <div className='mt-[40px]'>
                     <label htmlFor="">
                     <p className='text-[#111827] text-[12px] font-semibold'>Telefon raqami</p>
                     <input type="number" placeholder='+998' className='py-[12px] px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-[313px] mt-[6px]'/>
