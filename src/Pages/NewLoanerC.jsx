@@ -19,10 +19,6 @@ export default class NewLoanerC extends Component {
               <h2 className='text-[14px] font-normal'>Qarz oluvchi ma'lumotlarini to'ldiring</h2>
             </div>
             <div className='flex gap-[20px] items-center'>
-              <div className="w-[280px] h-[38px] border border-[#E5E7EB] rounded-[10px] flex items-center px-3 bg-white">
-                <Search className="w-4 h-4 text-gray-400 mr-2" />
-                <input type="text" placeholder="Qarz oluvchilarni qidirish..." className="w-full h-full outline-none text-sm text-gray-600 placeholder-gray-400" />
-              </div>
               <button className='border border-[#E5E7EB] bg-[#FFFFFF] p-[10px] rounded-[10px]'><Bell /></button>
               <span className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#2563EB] to-[#06B6D4] flex items-center justify-center text-white text-[13px] font-bold">SM </span>
             </div>
