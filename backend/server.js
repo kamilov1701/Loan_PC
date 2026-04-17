@@ -1,23 +1,23 @@
+require("dotenv").config();
 const express = require("express");
-const mysql = require("mysql2");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
+const connectDB = require("./config/db");
 
 const app = express();
+
+connectDB();
+
 app.use(cors());
 app.use(express.json());
 
-// DB CONNECTION
-const db = mysql.createConnection({
-    host: "localhost:5173",
-    user: "root",
-    password: "12345678", // your mysql password
-    database: "Loan_PC",
-});
+// routes
+app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/loans", require("./routes/loanRoutes"));
 
-// TEST
 app.get("/", (req, res) => {
-    res.send("API Working ✅");
+    res.send("API running...");
 });
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(process.env.PORT, () =>
+    console.log(`Server running on port ${process.env.PORT}`)
+);
