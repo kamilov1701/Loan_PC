@@ -22,7 +22,7 @@ export default function ProfileOwner() {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="min-h-screen flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
 
       {/* PROFILE CARD */}
       <div className="w-full max-w-3xl bg-white rounded-3xl shadow p-6">

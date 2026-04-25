@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Bar, Line } from "react-chartjs-2";
+import { Bell } from 'lucide-react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -84,34 +85,32 @@ export default function Analytics() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 font-sans">
+    <div className="font-sans">
+
       {/* Header */}
-      <header className="bg-white rounded-xl shadow flex items-center justify-between px-6 py-4 mb-6">
-        <div className="text-lg font-semibold">
-          Analytics <span className="text-gray-400 text-sm ml-2">Insights & reports</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <input
-            type="text"
-            placeholder="Search loaners..."
-            className="border rounded-lg px-3 py-1 text-sm"
-          />
-          <div className="w-9 h-9 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
-            SM
+      <section>
+        <div className='container flex items-center justify-between'>
+          <div className='flex gap-[5px] items-center'>
+            <h1 className='text-[21px] font-bold'>Analitika</h1>
+            <h2 className='text-[14px] ml-[12px] font-normal'>Insights & reports</h2>
+          </div>
+          <div className='flex gap-[20px] items-center'>
+            <button className='border border-[#E5E7EB] bg-[#FFFFFF] p-[10px] rounded-[10px]'><a href="/alert"><Bell /></a></button>
+            <button><a href="/profile"><span className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#2563EB] to-[#06B6D4] flex items-center justify-center text-white text-[13px] font-bold">SM</span></a></button>
           </div>
         </div>
-      </header>
+      </section> <hr className='mt-[12px]' />
 
       {/* Topbar Controls */}
-      <div className="flex flex-wrap gap-3 items-center mb-6">
+      <div className="flex flex-wrap gap-3 items-center mt-[20px]">
         <div className="flex rounded-lg border overflow-hidden">
           {["Weekly", "Monthly", "Yearly"].map((option) => (
             <button
               key={option}
               onClick={() => setSwitchPeriod(option)}
               className={`px-4 py-2 text-sm ${switchPeriod === option
-                  ? "bg-blue-500 text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
+                ? "bg-blue-500 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
                 }`}
             >
               {option}
@@ -124,8 +123,8 @@ export default function Analytics() {
               key={option}
               onClick={() => setSwitchType(option)}
               className={`px-4 py-2 text-sm ${switchType === option
-                  ? "bg-green-500 text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
+                ? "bg-green-500 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
                 }`}
             >
               {option}
@@ -135,7 +134,7 @@ export default function Analytics() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-[20px] mb-6">
         {[
           { label: "Total Loans", value: 84500000, color: "text-blue-600" },
           { label: "Repaid", value: 31200000, color: "text-green-600" },
@@ -164,54 +163,6 @@ export default function Analytics() {
         <div className="bg-white rounded-xl shadow p-4">
           <div className="font-semibold mb-2">Trend — Line Chart</div>
           <Line data={lineData} options={chartOptions} />
-        </div>
-      </div>
-
-      {/* Detailed Summary Table */}
-      <div className="bg-white rounded-xl shadow p-4">
-        <div className="font-semibold mb-4">Detailed Summary</div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="px-3 py-2 border">Period</th>
-                <th className="px-3 py-2 border">New Loans</th>
-                <th className="px-3 py-2 border">Repayments</th>
-                <th className="px-3 py-2 border">Net</th>
-                <th className="px-3 py-2 border">Loaners Count</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="px-3 py-2 border">Week 1</td>
-                <td className="px-3 py-2 border text-red-600">12 000 000</td>
-                <td className="px-3 py-2 border text-green-600">5 000 000</td>
-                <td className="px-3 py-2 border text-red-500">–7 000 000</td>
-                <td className="px-3 py-2 border">4</td>
-              </tr>
-              <tr>
-                <td className="px-3 py-2 border">Week 2</td>
-                <td className="px-3 py-2 border text-red-600">8 500 000</td>
-                <td className="px-3 py-2 border text-green-600">9 200 000</td>
-                <td className="px-3 py-2 border text-green-500">+700 000</td>
-                <td className="px-3 py-2 border">3</td>
-              </tr>
-              <tr>
-                <td className="px-3 py-2 border">Week 3</td>
-                <td className="px-3 py-2 border text-red-600">15 000 000</td>
-                <td className="px-3 py-2 border text-green-600">11 000 000</td>
-                <td className="px-3 py-2 border text-red-500">–4 000 000</td>
-                <td className="px-3 py-2 border">6</td>
-              </tr>
-              <tr>
-                <td className="px-3 py-2 border">Week 4</td>
-                <td className="px-3 py-2 border text-red-600">6 000 000</td>
-                <td className="px-3 py-2 border text-green-600">6 000 000</td>
-                <td className="px-3 py-2 border text-gray-500">—</td>
-                <td className="px-3 py-2 border">2</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
