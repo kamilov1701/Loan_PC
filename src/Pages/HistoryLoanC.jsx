@@ -10,10 +10,10 @@ export default class History extends Component {
       <div>
 
         {/* NAV */}
-        <div className='flex justify-between bg-[#FFF] w-full h-[64px] border-b-[1px] border-[#E5E7EB] px-[20px] items-center'>
-          <div className='flex gap-[6px]'>
-            <h1 className='text-[17px] font-bold'>Transaction History</h1>
-            <h2 className='text-[14px] font-normal'>Anvar Karimov</h2>
+        <div className='flex justify-between bg-[#FFF] w-full h-[64px] border-b-[1px] border-[#E5E7EB]  items-center'>
+          <div className='flex gap-[6px] items-center'>
+            <h1 className='text-[21px] font-bold'>Transaction History</h1>
+            <h2 className='text-[17px] ml-[10px] font-normal'>Anvar Karimov</h2>
           </div>
 
           <div className='flex gap-[20px] items-center'>
@@ -27,7 +27,7 @@ export default class History extends Component {
         </div>
 
         {/* HERO */}
-        <section className='mt-[28px] px-[20px]'>
+        <section className='mt-[28px]'>
           <div className='bg-gradient-to-r from-[#1E3A8A] via-[#2563EB] to-[#0EA5E9] w-full h-[116px] rounded-[14px] py-[20px] px-[24px]'>
             <div className='flex gap-[10px] text-[#fff] text-[21px]'>
               <h1>Anvar Karimov</h1>
@@ -44,7 +44,7 @@ export default class History extends Component {
           <section className='bg-[#fff] shadow-lg rounded-xl max-w-[700px] w-full mt-[24px] p-[29px]'>
 
             <div>
-              <p className='text-[#6B7280] text-[19px] font-semibold'>All Transactions</p>
+              <p className='text-[#6B7280] text-[17px] font-semibold'>All Transactions</p>
             </div>
 
             <div className='mt-[20px]'>
