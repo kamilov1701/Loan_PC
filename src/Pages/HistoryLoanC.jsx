@@ -132,9 +132,9 @@ export default class History extends Component {
 
           {/* BACK BUTTON */}
           <div className='mt-[16px]'>
-            <button className='flex gap-[6px] items-center border px-[14px] py-[8px] rounded-[8px] text-[14px]'>
+            <a href="/list"><button className='flex gap-[6px] items-center border px-[14px] py-[8px] rounded-[8px] text-[14px]'>
               <ArrowLeft size={16} /> Back to Loaners List
-            </button>
+            </button></a>
           </div>
 
         </main>

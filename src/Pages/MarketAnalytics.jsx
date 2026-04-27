@@ -134,7 +134,7 @@ export default function Analytics() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-[20px] mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-[20px] mb-[20px] top_header_analytics">
         {[
           { label: "Total Loans", value: 84500000, color: "text-blue-600" },
           { label: "Repaid", value: 31200000, color: "text-green-600" },

@@ -83,12 +83,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -108,12 +108,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -133,12 +133,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -158,12 +158,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -183,12 +183,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -208,12 +208,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -233,12 +233,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -258,12 +258,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -283,12 +283,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -308,12 +308,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -333,12 +333,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
             <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -358,12 +358,12 @@ export default class ListLoan extends Component {
               </div>
 
               <div className='flex gap-[20px] items-center ml-[15px]'>
-                <Plus size={16} />
-                <Minus size={16} />
-                <Clock size={16} />
+                <a href="/plus-loan"><Plus size={16} /></a>
+                <a href="/minus-loan"><Minus size={16} /></a>
+                <a href="/history"><Clock size={16} /></a>
                 <Eye size={16} />
-                <Pencil size={16} />
-                <Trash2 size={16} />
+                <a href="/edit-loaner"><Pencil size={16} /></a>
+                <a href="#!"><Trash2 size={16} /></a>
               </div>
             </div>
           </div>

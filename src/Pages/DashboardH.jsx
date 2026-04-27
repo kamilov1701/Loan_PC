@@ -62,35 +62,35 @@ export default function DashboardH() {
             <button><a href="/profile"><span className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#2563EB] to-[#06B6D4] flex items-center justify-center text-white text-[13px] font-bold">SM</span></a></button>
           </div>
         </div>
-      </section> <hr  className='mt-[12px]'/>
+      </section> <hr className='mt-[12px]' />
 
       {/* Home Header */}
 
-      <section className='container'>
+      <section className='container header_home'>
         <div className='mt-[28px] flex gap-[16px]'>
           <div className='flex gap-[16px] shadow-[0_1px_3px_0_#0000000F,0_4px_16px_0_#0000000F] py-[23px] px-[23px] rounded-[14px] w-[50%]'>
             <span><DollarSign className='bg-[#EFF6FF] px-[12px] w-[48px] h-[48px] rounded-[12px]' /></span>
             <div>
-              <p className='text-[#6B7280] text-[12px] font-medium'>Total Written Loans</p>
-              <h2 className='text-[#111827] text-[24px] font-extrabold'>84 500 000</h2>
-              <p className='text-[#9CA3AF] text-[12px] font-normal'>UZS · 24 active loaners</p>
-              <h3 className='text-[#10B981] text-[11px] font-semibold px-[8px] py-[2px] bg-[#ECFDF5] rounded-[20px] w-[112px]'>↑ +12% this month</h3>
+              <p className='text-[#fff] text-[17px] font-medium'>Umumiy kiritilgan qarzlar</p>
+              <h2 className='text-[#fff] text-[24px] font-extrabold'>84 500 000</h2>
+              <p className='text-[#fff] text-[15px] font-normal'>UZS · 24ta Aktiv qarzdorlar</p>
+              <h3 className='text-[#10B981] text-[11px] font-semibold px-[8px] py-[5px] mt-[5px] bg-[#ECFDF5] rounded-[20px] w-[112px]'>↑ +12% this month</h3>
             </div>
           </div>
           <div className='flex gap-[16px] shadow-[0_1px_3px_0_#0000000F,0_4px_16px_0_#0000000F] py-[23px] px-[23px] rounded-[14px] w-[50%]'>
             <span><Check className='bg-[#ECFDF5] px-[12px] w-[48px] h-[48px] rounded-[12px]' /></span>
             <div>
-              <p className='text-[#6B7280] text-[12px] font-medium'>Total Reduced Loans</p>
-              <h2 className='text-[#111827] text-[24px] font-extrabold'>31 200 000</h2>
-              <p className='text-[#9CA3AF] text-[12px] font-normal'>UZS · 8 fully paid</p>
-              <h3 className='text-[#10B981] text-[11px] font-semibold px-[8px] py-[2px] bg-[#ECFDF5] rounded-[20px] w-[112px]'>↑ +5% this month</h3>
+              <p className='text-[#fff] text-[17px] font-medium'>Umumiy ayirilgan qarzlar</p>
+              <h2 className='text-[#fff] text-[24px] font-extrabold'>31 200 000</h2>
+              <p className='text-[#fff] text-[15px] font-normal'>UZS · 8ta To'liq to'lagan</p>
+              <h3 className='text-[#10B981] text-[11px] font-semibold px-[8px] py-[5px] mt-[5px] bg-[#ECFDF5] rounded-[20px] w-[112px]'>↑ +5% this month</h3>
             </div>
           </div>
         </div>
       </section>
 
       {/* List Home */}
-      
+
       <section className='container'>
         <div className='flex items-center mt-[24px] mb-[16px]'>
           <h2 className='text-[#111827] text-[15px] font-bold'>Yaqinda qo'shilgan qarzlar</h2>
@@ -130,12 +130,12 @@ export default function DashboardH() {
             </div>
 
             <div className='flex gap-[20px] items-center ml-[15px]'>
-              <Plus size={16} />
-              <Minus size={16} />
-              <Clock size={16} />
+              <a href="/plus-loan"><Plus size={16} /></a>
+              <a href="/minus-loan"><Minus size={16} /></a>
+              <a href="/history"><Clock size={16} /></a>
               <Eye size={16} />
-              <Pencil size={16} />
-              <Trash2 size={16} />
+              <a href="/edit-loaner"><Pencil size={16} /></a>
+              <a href="#!"><Trash2 size={16} /></a>
             </div>
           </div>
           <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -155,12 +155,12 @@ export default function DashboardH() {
             </div>
 
             <div className='flex gap-[20px] items-center ml-[15px]'>
-              <Plus size={16} />
-              <Minus size={16} />
-              <Clock size={16} />
+              <a href="/plus-loan"><Plus size={16} /></a>
+              <a href="/minus-loan"><Minus size={16} /></a>
+              <a href="/history"><Clock size={16} /></a>
               <Eye size={16} />
-              <Pencil size={16} />
-              <Trash2 size={16} />
+              <a href="/edit-loaner"><Pencil size={16} /></a>
+              <a href="#!"><Trash2 size={16} /></a>
             </div>
           </div>
           <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -180,12 +180,12 @@ export default function DashboardH() {
             </div>
 
             <div className='flex gap-[20px] items-center ml-[15px]'>
-              <Plus size={16} />
-              <Minus size={16} />
-              <Clock size={16} />
+              <a href="/plus-loan"><Plus size={16} /></a>
+              <a href="/minus-loan"><Minus size={16} /></a>
+              <a href="/history"><Clock size={16} /></a>
               <Eye size={16} />
-              <Pencil size={16} />
-              <Trash2 size={16} />
+              <a href="/edit-loaner"><Pencil size={16} /></a>
+              <a href="#!"><Trash2 size={16} /></a>
             </div>
           </div>
           <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -205,12 +205,12 @@ export default function DashboardH() {
             </div>
 
             <div className='flex gap-[20px] items-center ml-[15px]'>
-              <Plus size={16} />
-              <Minus size={16} />
-              <Clock size={16} />
+              <a href="/plus-loan"><Plus size={16} /></a>
+              <a href="/minus-loan"><Minus size={16} /></a>
+              <a href="/history"><Clock size={16} /></a>
               <Eye size={16} />
-              <Pencil size={16} />
-              <Trash2 size={16} />
+              <a href="/edit-loaner"><Pencil size={16} /></a>
+              <a href="#!"><Trash2 size={16} /></a>
             </div>
           </div>
           <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -230,12 +230,12 @@ export default function DashboardH() {
             </div>
 
             <div className='flex gap-[20px] items-center ml-[15px]'>
-              <Plus size={16} />
-              <Minus size={16} />
-              <Clock size={16} />
+              <a href="/plus-loan"><Plus size={16} /></a>
+              <a href="/minus-loan"><Minus size={16} /></a>
+              <a href="/history"><Clock size={16} /></a>
               <Eye size={16} />
-              <Pencil size={16} />
-              <Trash2 size={16} />
+              <a href="/edit-loaner"><Pencil size={16} /></a>
+              <a href="#!"><Trash2 size={16} /></a>
             </div>
           </div>
           <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -255,12 +255,12 @@ export default function DashboardH() {
             </div>
 
             <div className='flex gap-[20px] items-center ml-[15px]'>
-              <Plus size={16} />
-              <Minus size={16} />
-              <Clock size={16} />
+              <a href="/plus-loan"><Plus size={16} /></a>
+              <a href="/minus-loan"><Minus size={16} /></a>
+              <a href="/history"><Clock size={16} /></a>
               <Eye size={16} />
-              <Pencil size={16} />
-              <Trash2 size={16} />
+              <a href="/edit-loaner"><Pencil size={16} /></a>
+              <a href="#!"><Trash2 size={16} /></a>
             </div>
           </div>
           <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -280,12 +280,12 @@ export default function DashboardH() {
             </div>
 
             <div className='flex gap-[20px] items-center ml-[15px]'>
-              <Plus size={16} />
-              <Minus size={16} />
-              <Clock size={16} />
+              <a href="/plus-loan"><Plus size={16} /></a>
+              <a href="/minus-loan"><Minus size={16} /></a>
+              <a href="/history"><Clock size={16} /></a>
               <Eye size={16} />
-              <Pencil size={16} />
-              <Trash2 size={16} />
+              <a href="/edit-loaner"><Pencil size={16} /></a>
+              <a href="#!"><Trash2 size={16} /></a>
             </div>
           </div>
           <div className='flex items-center border border-[#E5E7EB] py-[13px]'>
@@ -305,12 +305,12 @@ export default function DashboardH() {
             </div>
 
             <div className='flex gap-[20px] items-center ml-[15px]'>
-              <Plus size={16} />
-              <Minus size={16} />
-              <Clock size={16} />
+              <a href="/plus-loan"><Plus size={16} /></a>
+              <a href="/minus-loan"><Minus size={16} /></a>
+              <a href="/history"><Clock size={16} /></a>
               <Eye size={16} />
-              <Pencil size={16} />
-              <Trash2 size={16} />
+              <a href="/edit-loaner"><Pencil size={16} /></a>
+              <a href="#!"><Trash2 size={16} /></a>
             </div>
           </div>
         </div>
