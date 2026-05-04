@@ -219,14 +219,14 @@ export default function EditLoanerInfo() {
                   <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>To'liq ism</label>
                   <input 
                     name="name" value={formData.name} onChange={handleInputChange}
-                    type="text" className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-indigo-500 transition-all' 
+                    type="text" className='w-full bg-slate-50 dark:bg-slate-800/50 text-[#fff] border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-indigo-500 transition-all' 
                   />
                 </div>
                 <div>
                   <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Telefon raqami</label>
                   <input 
                     name="phone_number" value={formData.phone_number} onChange={handleInputChange}
-                    type="tel" className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-indigo-500 transition-all' 
+                    type="tel" className='w-full bg-slate-50 dark:bg-slate-800/50 border text-[#fff] border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-indigo-500 transition-all' 
                   />
                 </div>
               </div>
@@ -250,14 +250,14 @@ export default function EditLoanerInfo() {
                       <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Boshlanish</label>
                       <input 
                         name="start_date" value={formData.start_date} onChange={handleInputChange}
-                        type="date" className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-4 py-4 text-xs font-bold outline-none focus:border-indigo-500 transition-all' 
+                        type="date" className='w-full bg-slate-50 dark:bg-slate-800/50 border text-[#fff] border-slate-100 dark:border-slate-800 rounded-2xl px-4 py-4 text-xs font-bold outline-none focus:border-indigo-500 transition-all' 
                       />
                     </div>
                     <div>
                       <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Muddati</label>
                       <input 
                         name="deadline" value={formData.deadline} onChange={handleInputChange}
-                        type="date" className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-4 py-4 text-xs font-bold outline-none focus:border-indigo-500 transition-all' 
+                        type="date" className='w-full bg-slate-50 dark:bg-slate-800/50 border text-[#fff] border-slate-100 dark:border-slate-800 rounded-2xl px-4 py-4 text-xs font-bold outline-none focus:border-indigo-500 transition-all' 
                       />
                     </div>
                   </div>
@@ -266,7 +266,7 @@ export default function EditLoanerInfo() {
                     <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Holati</label>
                     <select 
                       name="status" value={formData.status} onChange={handleInputChange}
-                      className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-xs font-black uppercase tracking-widest outline-none focus:border-indigo-500 transition-all'
+                      className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 text-[#fff] dark:border-slate-800 rounded-2xl px-6 py-4 text-xs font-black uppercase tracking-widest outline-none focus:border-indigo-500 transition-all'
                     >
                       <option value="Active">Faol</option>
                       <option value="Paid">To'langan</option>
@@ -279,7 +279,7 @@ export default function EditLoanerInfo() {
                     <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Izoh</label>
                     <textarea 
                       name="comment" value={formData.comment} onChange={handleInputChange}
-                      rows="4" className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-indigo-500 transition-all resize-none' 
+                      rows="4" className='w-full bg-slate-50 dark:bg-slate-800/50 border text-[#fff] border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:border-indigo-500 transition-all resize-none' 
                     ></textarea>
                   </div>
                 </div>

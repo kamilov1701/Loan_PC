@@ -47,7 +47,7 @@ export default function LoanAlert() {
           <div className='flex gap-2 items-center'>
             <h1 className='text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic'>Ogohlantirishlar</h1>
             <div className="w-1 h-1 rounded-full bg-indigo-500"></div>
-            <h2 className='text-xs font-bold text-slate-400 uppercase tracking-widest'>Overview</h2>
+            <h2 className='text-xs font-bold text-slate-400 uppercase tracking-widest'>Umumiy ma'lumot</h2>
           </div>
           
           <div className='flex gap-4 items-center w-full md:w-auto'>
@@ -80,7 +80,7 @@ export default function LoanAlert() {
                     <h2 className='text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest'>Muddati o'tgan</h2>
                 </div>
                 <span className='px-3 py-1 bg-rose-500 text-white text-[10px] font-black rounded-full uppercase tracking-tighter shadow-lg shadow-rose-500/20'>
-                    {overdueFiltered.length} Active
+                    {overdueFiltered.length} Faol
                 </span>
             </div>
 
@@ -139,7 +139,7 @@ export default function LoanAlert() {
                     <h2 className='text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest'>Kelgusi to'lovlar</h2>
                 </div>
                 <span className='px-3 py-1 bg-indigo-500 text-white text-[10px] font-black rounded-full uppercase tracking-tighter shadow-lg shadow-indigo-500/20'>
-                    {upcomingFiltered.length} Soon
+                    {upcomingFiltered.length} Yaqinda
                 </span>
             </div>
 

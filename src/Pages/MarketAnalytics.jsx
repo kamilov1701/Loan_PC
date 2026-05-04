@@ -71,7 +71,6 @@ export default function Analytics() {
       borderRadius: 6,
     }]
   };
-
   const lineData = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [{

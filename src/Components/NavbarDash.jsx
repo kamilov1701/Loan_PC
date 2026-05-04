@@ -64,7 +64,7 @@ function NavbarDash({ isDarkMode, toggleTheme }) {
                    : "text-slate-500 hover:text-slate-300"}`}
             >
               <HiSun size={14} />
-              Day
+              kun
             </button>
             <button 
               onClick={() => !isDarkMode && toggleTheme()}
@@ -74,7 +74,7 @@ function NavbarDash({ isDarkMode, toggleTheme }) {
                    : "text-slate-400 hover:text-slate-600"}`}
             >
               <HiMoon size={14} />
-              Night
+              tun
             </button>
           </div>
           <p className={`text-[10px] font-black uppercase text-center tracking-widest ${isDarkMode ? "text-white" : "text-white/40"}`}>

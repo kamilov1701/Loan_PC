@@ -23,7 +23,7 @@ export default function HistoryLoanC() {
         }
     }, [loanerId]);
 
-    if (loading) return <div className="p-10 text-center text-slate-400 font-black uppercase tracking-[0.2em] animate-pulse">Loading...</div>;
+    if (loading) return <div className="p-10 text-center text-slate-400 font-black uppercase tracking-[0.2em] animate-pulse">Yuklanmoqda...</div>;
     if (!data || data.error) return <div className="p-10 text-center text-rose-500 font-bold uppercase tracking-widest">{data?.error || "Data not found"}</div>;
 
     const { loaner, transactions } = data;
@@ -33,7 +33,7 @@ export default function HistoryLoanC() {
             <section className="px-4">
                 <div className='container flex items-center justify-between py-6'>
                     <div className='flex gap-2 items-center'>
-                        <h1 className='text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic'>History</h1>
+                        <h1 className='text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic'>Tarix</h1>
                         <div className="w-1 h-1 rounded-full bg-indigo-500"></div>
                         <h2 className='text-xs font-bold text-slate-400 uppercase tracking-widest'>{loaner.name}</h2>
                     </div>
@@ -52,12 +52,12 @@ export default function HistoryLoanC() {
                         <div>
                             <div className='flex items-center gap-2 mb-2'>
                                 <h1 className='text-white text-xl md:text-2xl font-black tracking-tight uppercase italic'>{loaner.name}</h1>
-                                <span className="text-white/40 font-bold uppercase tracking-widest text-[10px]">| Transaction History</span>
+                                <span className="text-white/40 font-bold uppercase tracking-widest text-[10px]">| Xizmatlar tarixi</span>
                             </div>
                             <h3 className='text-3xl md:text-4xl font-black text-white tracking-tighter'>{loaner.loan_amount} <span className="text-sm text-white/50 uppercase">UZS</span></h3>
                         </div>
                         <div className="bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/10">
-                            <p className="text-white/40 text-[9px] font-black uppercase tracking-widest mb-1">Status</p>
+                            <p className="text-white/40 text-[9px] font-black uppercase tracking-widest mb-1">Holati</p>
                             <span className="text-white font-black text-xs uppercase tracking-widest px-3 py-1 bg-white/20 rounded-full border border-white/20">
                                 {loaner.status}
                             </span>
@@ -69,15 +69,15 @@ export default function HistoryLoanC() {
             <main className='container px-4 mt-10 max-w-4xl'>
                 <div className='bg-white dark:bg-slate-900 rounded-[32px] border border-slate-100 dark:border-slate-800 shadow-xl overflow-hidden'>
                     <div className='p-8 border-b border-slate-50 dark:border-slate-800/50 flex items-center justify-between'>
-                        <h4 className='text-xs font-black text-slate-400 uppercase tracking-[0.25em]'>All Transactions</h4>
+                        <h4 className='text-xs font-black text-slate-400 uppercase tracking-[0.25em]'>Barcha xizmatlar</h4>
                         <span className="text-[10px] font-black text-indigo-500 bg-indigo-500/10 px-3 py-1 rounded-full uppercase tracking-tighter">
-                            {transactions.length} Transactions
+                            {transactions.length} Xizmatlar
                         </span>
                     </div>
 
                     <div className='divide-y divide-slate-50 dark:divide-slate-800/50'>
                         {transactions.length === 0 ? (
-                            <div className="p-16 text-center text-slate-300 font-bold uppercase tracking-widest text-xs opacity-50">No transactions yet</div>
+                            <div className="p-16 text-center text-slate-300 font-bold uppercase tracking-widest text-xs opacity-50">Hozircha xizmatlar yo'q</div>
                         ) : (
                             transactions.map((t) => (
                                 <div key={t.id} className='flex items-center justify-between p-6 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-all group'>
@@ -89,9 +89,9 @@ export default function HistoryLoanC() {
                                         </div>
                                         <div>
                                             <h4 className='text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight group-hover:text-indigo-600 transition-colors'>
-                                                {t.type === 'Added' ? '+ Added Loan' : '– Reduced Loan'}
+                                                {t.type === 'Added' ? `+ Qarz qo'shildi` : `– Qarz ayrildi`}
                                             </h4>
-                                            <p className='text-xs text-slate-400 font-bold uppercase tracking-widest mt-1'>{t.comment || "No comment"}</p>
+                                            <p className='text-xs text-slate-400 font-bold uppercase tracking-widest mt-1'>{t.comment || "Izoh yo'q"}</p>
                                         </div>
                                     </div>
                                     <div className='text-right'>
@@ -109,10 +109,10 @@ export default function HistoryLoanC() {
 
                     <div className='p-8 bg-slate-50 dark:bg-slate-800/20 border-t border-slate-50 dark:border-slate-800/50 flex flex-col sm:flex-row gap-4 items-center justify-between'>
                         <button className='w-full sm:w-auto flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-indigo-500/20 active:scale-95 transition-all'>
-                            <FileText size={16} /> Export XLSX
+                            <FileText size={16} />XLSX Yuklash
                         </button>
                         <a href="/list" className='w-full sm:w-auto text-center text-slate-400 hover:text-indigo-600 text-[10px] font-black uppercase tracking-widest transition-colors flex items-center justify-center gap-2'>
-                            <ArrowLeft size={14} /> Back to List
+                            <ArrowLeft size={14} /> Qaytish
                         </a>
                     </div>
                 </div>

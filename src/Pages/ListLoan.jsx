@@ -86,9 +86,9 @@ export default function ListLoan() {
       <section className="px-4">
         <div className='container flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-6'>
           <div className='flex gap-2 items-center'>
-            <h1 className='text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic'>Debtors</h1>
+            <h1 className='text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic'>Qarzdorlar</h1>
             <div className="w-1 h-1 rounded-full bg-indigo-500"></div>
-            <h2 className='text-xs font-bold text-slate-400 uppercase tracking-widest'>All Clients</h2>
+            <h2 className='text-xs font-bold text-slate-400 uppercase tracking-widest'>Barcha mijozlar</h2>
           </div>
           <div className='flex gap-4 items-center w-full md:w-auto justify-end'>
             <button className='border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 rounded-xl shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors'>
@@ -112,7 +112,7 @@ export default function ListLoan() {
               <Search className="w-5 h-5 text-slate-400 mr-2" />
               <input 
                 type="text" 
-                placeholder="Search..." 
+                placeholder="Qidirish..." 
                 className="w-full h-full outline-none text-sm bg-transparent text-slate-700 dark:text-slate-300 placeholder-slate-400"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -123,11 +123,11 @@ export default function ListLoan() {
                 onClick={() => setShowFilterDropdown(!showFilterDropdown)}
                 className='flex-1 md:flex-none text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 text-xs font-bold px-4 py-2.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl flex items-center justify-center gap-2 transition-colors'
               >
-                <Funnel className='opacity-60' size={16} /> {filterStatus === 'All' ? 'Filter' : filterStatus}
+                <Funnel className='opacity-60' size={16} /> {filterStatus === 'All' ? 'Filtr' : filterStatus}
               </button>
               {showFilterDropdown && (
                 <div className="absolute top-12 left-0 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl z-[60] overflow-hidden">
-                    {['All', 'Active', 'Paid', 'Overdue', 'Due Soon'].map(status => (
+                    {['Hammasi', 'Faol', `To'langan`, `Muddati o'tgan`, 'Tez orada'].map(status => (
                         <button 
                             key={status}
                             onClick={() => { setFilterStatus(status); setShowFilterDropdown(false); }}
@@ -142,32 +142,32 @@ export default function ListLoan() {
                 onClick={handleExportXLS}
                 className='flex-1 md:flex-none text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 text-xs font-bold px-4 py-2.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl flex items-center justify-center gap-2 transition-colors'
               >
-                <FileText className='opacity-60' size={16} /> Export
+                <FileText className='opacity-60' size={16} /> Yuklash
               </button>
             </div>
           </div>
           <button onClick={() => window.location.href = '/new-loaner'} className='w-full lg:w-auto text-white text-xs font-black px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-indigo-500/20 uppercase tracking-widest'>
-            <Plus size={18} /> New Client
+            <Plus size={18} /> Yangi mijoz
           </button>
         </div>
 
         <div className='mt-4'>
           {loading ? (
-            <div className="p-10 text-center text-slate-400 font-bold uppercase tracking-widest animate-pulse">Loading...</div>
+            <div className="p-10 text-center text-slate-400 font-bold uppercase tracking-widest animate-pulse">Yuklanmoqda...</div>
           ) : filteredLoaners.length === 0 ? (
-            <div className="p-10 text-center text-slate-500 font-bold uppercase tracking-widest text-xs opacity-50">No Clients Found</div>
+            <div className="p-10 text-center text-slate-500 font-bold uppercase tracking-widest text-xs opacity-50">Mijozlar topilmadi</div>
           ) : (
             <>
               <div className='hidden md:block border border-slate-200 dark:border-slate-800 rounded-2xl w-full overflow-x-auto bg-white dark:bg-slate-900 shadow-sm'>
                 <div className='flex bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 min-w-[1000px]'>
                   <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[45px] px-4'>#</div>
-                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[199px] px-4'>Loaner</div>
-                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[154px] px-4'>Phone</div>
-                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[141px] px-4'>Loan Amount</div>
-                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[112px] px-4'>Start Date</div>
-                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[115px] px-4'>Deadline</div>
-                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[120px] px-4'>Status</div>
-                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest flex-1 px-4 text-center'>Actions</div>
+                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[199px] px-4'>Qarzdor</div>
+                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[154px] px-4'>Telefon raqami</div>
+                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[141px] px-4'>Qarz miqdori</div>
+                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[112px] px-4'>Boshlanishi</div>
+                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[115px] px-4'>Tugashi</div>
+                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest w-[120px] px-4'>Holati</div>
+                  <div className='py-4 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest flex-1 px-4 text-center'>Ishoralar</div>
                 </div>
                 {filteredLoaners.map((loaner, index) => (
                   <div key={loaner.id} className='flex items-center border-b border-slate-100 dark:border-slate-800 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group min-w-[1000px]'>
@@ -229,11 +229,11 @@ export default function ListLoan() {
                     </div>
                     <div className='grid grid-cols-2 gap-4 py-3 border-y border-slate-50 dark:border-slate-800/50 mb-4'>
                       <div>
-                        <p className='text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1'>Amount</p>
+                        <p className='text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1'>Miqdor</p>
                         <p className='text-rose-600 dark:text-rose-400 text-sm font-black'>{loaner.loan_amount} <span className='text-[10px] opacity-60 font-medium'>UZS</span></p>
                       </div>
                       <div className='text-right'>
-                        <p className='text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1'>Deadline</p>
+                        <p className='text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1'>Tugashi</p>
                         <p className='text-slate-700 dark:text-slate-300 text-sm font-black'>{loaner.deadline}</p>
                       </div>
                     </div>
@@ -270,7 +270,7 @@ export default function ListLoan() {
               ) : (
                 <div className="w-64 h-64 bg-slate-100 dark:bg-slate-800 rounded-2xl flex flex-col items-center justify-center text-slate-400">
                    <UserIcon size={64} className="mb-4 opacity-20" />
-                   <p className="text-xs font-black uppercase tracking-widest">No Image Available</p>
+                   <p className="text-xs font-black uppercase tracking-widest">Rasm topilmadi</p>
                 </div>
               )}
               <div className="mt-8 w-full flex justify-center">
@@ -278,7 +278,7 @@ export default function ListLoan() {
                   onClick={() => setShowModal(false)}
                   className="px-10 py-4 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-indigo-500/30 transition-all active:scale-95"
                 >
-                  Close
+                  Yopish
                 </button>
               </div>
             </div>
@@ -287,4 +287,4 @@ export default function ListLoan() {
       )}
     </div>
   );
-}
+}
