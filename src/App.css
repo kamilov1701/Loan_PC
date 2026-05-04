@@ -200,7 +200,9 @@
   background-size: cover;
   border-radius: 25px;
   width: 100%;
-  height: 165px;
+  min-height: 165px;
+  height: auto;
+  padding-bottom: 20px;
 }
 
 .top_header_analytics {
@@ -211,7 +213,6 @@
   border-radius: 15px;
   width: 100%;
   padding: 12px;
-  /* height: 165px; */
 
   label{
     border-radius: none;

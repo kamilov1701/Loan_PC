@@ -1,373 +1,195 @@
-// import React, { Component } from 'react'
-// import { Search } from "lucide-react";
-// import { Bell } from "lucide-react";
-// import { Phone, MessageSquare } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Bell, Phone, MessageSquare, Calendar, ArrowRight, Clock, AlertTriangle } from "lucide-react";
 
-// export default class LoanAlert extends Component {
-//   render() {
-//     return (
-//       <div>
+export default function LoanAlert() {
+  const [data, setData] = useState({ overdue: [], upcoming: [] });
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
 
-//         <section className='border-[#E5E7EB] border px-[28px]'>
-//           <div className='py-[7px] flex items-center container justify-between '>
-//             <div className='flex gap-[5px] items-center'>
-//               <h1 className='text-[17px] font-bold'>Ogohlantirishlar</h1>
-//               <h2 className='text-[14px] font-normal'>Belgilangan muddatlar va bildirishnomalar</h2>
-//             </div>
-//             <div className='flex gap-[20px] items-center'>
-//               <div className="w-[280px] h-[38px] border border-[#E5E7EB] rounded-[10px] flex items-center px-3 bg-white">
-//                 <Search className="w-4 h-4 text-gray-400 mr-2" />
-//                 <input type="text" placeholder="Qarz oluvchilarni qidirish..." className="w-full h-full outline-none text-sm text-gray-600 placeholder-gray-400" />
-//               </div>
-//               <button className='border border-[#E5E7EB] bg-[#FFFFFF] p-[10px] rounded-[10px]'><Bell /></button>
-//               <span className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#2563EB] to-[#06B6D4] flex items-center justify-center text-white text-[13px] font-bold">SM </span>
-//             </div>
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}get_alerts.php`)
+      .then(res => res.json())
+      .then(resData => {
+        setData(resData);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
 
-//           </div>
-//         </section>
+  const handleCall = (phone) => {
+    window.location.href = `tel:${phone}`;
+  };
 
-//         <section className='mt-[28px] container'>
-//           <div className='flex gap-[16px] items-center mb-[16px]'>
-//             <button className='text-[#111827] text-[13px] font-semibold py-[7px] px-[16px] bg-[#FFFFFF] shadow-[0_4px_16px_0_#0000000F,0_1px_3px_0_#0000000F] rounded-[7px]'>Kelgusi (2)</button>
-//             <button className='text-[#6B7280] text-[13px] font-semibold py-[7px] px-[16px] rounded-[7px]'>Muddati o'tgan (1)</button>
-//           </div>
+  const handleTelegram = (phone, name) => {
+    const message = encodeURIComponent(`Salom ${name}, qarzingiz to'lash muddati haqida eslatma.`);
+    window.open(`https://t.me/${phone.replace('+', '').replace(' ', '')}?text=${message}`, '_blank');
+  };
 
-//           <div className='space-y-[10px]'>
-//             <div className="flex items-center justify-between px-4 py-3 bg-[#fff] border-[#E5E7EB] border rounded-lg ">
+  const filterLoans = (list) => {
+    return list.filter(l => 
+      l.name.toLowerCase().includes(search.toLowerCase()) || 
+      l.phone_number.includes(search)
+    );
+  };
 
-//               <div className="flex items-center gap-2">
-//                 <div className="w-8 h-8 flex items-center justify-center text-white rounded-full bg-blue-500">
-//                   AK
-//                 </div>
-//                 <div>
-//                   <p className="text-[14px] font-medium">Dilnoza Yusupova</p>
-//                   <p className="text-[12px] text-gray-400">+998 90 123 45 67 · 2 kundan keyin tugaydi</p>
-//                 </div>
-//               </div>
+  if (loading) return <div className="p-10 text-center text-slate-400 font-black uppercase tracking-[0.2em] animate-pulse">Yuklanmoqda...</div>;
 
-//               <div className='flex items-center gap-[17px]'>
+  const overdueFiltered = filterLoans(data.overdue);
+  const upcomingFiltered = filterLoans(data.upcoming);
 
-//                 <input type="date" className='py-[10px] border-[#E5E7EB] border bg-[#FFFFFF] rounded-[8px] px-[16px]' />
-
-//                 <div className="text-[14px] font-semibold text-red-500">
-//                   1 800 000 so'm
-//                 </div>
-
-//                 <button className="flex items-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[11px] py-[7px] text-[12px] font-semibold text-[#111827] w-[143px]">
-//                   <Phone size={16} />
-//                   Qo'ng'iroq qiling
-//                 </button>
-//                 <button className="flex items-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[11px] py-[7px] text-[12px] font-semibold text-[#111827] w-[72px]">
-//                   <MessageSquare size={16} />
-//                   SMS
-//                 </button>
-//               </div>
-
-//             </div>
-//             <div className="flex items-center justify-between px-4 py-3 bg-[#fff] border-[#E5E7EB] border rounded-lg ">
-
-//               <div className="flex items-center gap-2">
-//                 <div className="w-8 h-8 flex items-center justify-center text-white rounded-full bg-blue-500">
-//                   AK
-//                 </div>
-//                 <div>
-//                   <p className="text-[14px] font-medium">Dilnoza Yusupova</p>
-//                   <p className="text-[12px] text-gray-400">+998 90 123 45 67 · 2 kundan keyin tugaydi</p>
-//                 </div>
-//               </div>
-
-//               <div className='flex items-center gap-[17px]'>
-
-//                 <input type="date" className='py-[10px] border-[#E5E7EB] border bg-[#FFFFFF] rounded-[8px] px-[16px]' />
-
-//                 <div className="text-[14px] font-semibold text-red-500">
-//                   1 800 000 so'm
-//                 </div>
-
-//                 <button className="flex items-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[11px] py-[7px] text-[12px] font-semibold text-[#111827] w-[143px]">
-//                   <Phone size={16} />
-//                   Qo'ng'iroq qiling
-//                 </button>
-//                 <button className="flex items-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[11px] py-[7px] text-[12px] font-semibold text-[#111827] w-[72px]">
-//                   <MessageSquare size={16} />
-//                   SMS
-//                 </button>
-//               </div>
-
-//             </div>
-//             <div className="flex items-center justify-between px-4 py-3 bg-[#fff] border-[#E5E7EB] border rounded-lg ">
-
-//               <div className="flex items-center gap-2">
-//                 <div className="w-8 h-8 flex items-center justify-center text-white rounded-full bg-blue-500">
-//                   AK
-//                 </div>
-//                 <div>
-//                   <p className="text-[14px] font-medium">Dilnoza Yusupova</p>
-//                   <p className="text-[12px] text-gray-400">+998 90 123 45 67 · 2 kundan keyin tugaydi</p>
-//                 </div>
-//               </div>
-
-//               <div className='flex items-center gap-[17px]'>
-
-//                 <input type="date" className='py-[10px] border-[#E5E7EB] border bg-[#FFFFFF] rounded-[8px] px-[16px]' />
-
-//                 <div className="text-[14px] font-semibold text-red-500">
-//                   1 800 000 so'm
-//                 </div>
-
-//                 <button className="flex items-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[11px] py-[7px] text-[12px] font-semibold text-[#111827] w-[143px]">
-//                   <Phone size={16} />
-//                   Qo'ng'iroq qiling
-//                 </button>
-//                 <button className="flex items-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[11px] py-[7px] text-[12px] font-semibold text-[#111827] w-[72px]">
-//                   <MessageSquare size={16} />
-//                   SMS
-//                 </button>
-//               </div>
-
-//             </div>
-//           </div>
-//         </section>
-
-//       </div>
-//     )
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React, { Component } from 'react'
-import { Search, Bell, Phone, MessageSquare, Calendar } from "lucide-react";
-
-export default class LoanAlert extends Component {
-
-  state = {
-    editIndex: null,
-    selectedDate: '',
-    loans: [
-      {
-        name: "Dilnoza Yusupova",
-        phone: "+998901234567",
-        dateText: "2 kundan keyin",
-        amount: "1 800 000 so'm",
-        date: "2026-05-01",
-        type: "upcoming"
-      },
-      {
-        name: "Anvar Karimov",
-        phone: "+998915552211",
-        dateText: "5 kundan keyin",
-        amount: "950 000 so'm",
-        date: "2026-05-05",
-        type: "upcoming"
-      },
-      {
-        name: "Jasur Aliyev",
-        phone: "+998932221100",
-        dateText: "3 kun kechikdi",
-        amount: "2 500 000 so'm",
-        date: "2026-04-20",
-        type: "overdue"
-      }
-    ]
-  }
-
-  openDatePicker = (index, currentDate) => {
-    this.setState({
-      editIndex: index,
-      selectedDate: currentDate
-    })
-  }
-
-  handleDateChange = (e) => {
-    this.setState({ selectedDate: e.target.value })
-  }
-
-  saveDate = (index) => {
-    const { loans, selectedDate } = this.state
-    const updated = [...loans]
-
-    updated[index].date = selectedDate
-    updated[index].dateText = "Yangilandi"
-
-    this.setState({
-      loans: updated,
-      editIndex: null
-    })
-  }
-
-  cancelEdit = () => {
-    this.setState({
-      editIndex: null,
-      selectedDate: ''
-    })
-  }
-
-  handleCall = (phone) => {
-    window.location.href = `tel:${phone}`
-  }
-
-  handleTelegram = (phone, name) => {
-    const message = encodeURIComponent(`Salom ${name}, qarzingiz haqida eslatma.`)
-    window.open(`https://t.me/${phone.replace('+', '')}?text=${message}`, '_blank')
-  }
-
-  renderLoanItem(item, index) {
-    const { editIndex, selectedDate } = this.state
-    const danger = item.type === "overdue"
-
-    return (
-      <div className="flex flex-col gap-[10px] p-[14px] bg-white border border-[#E5E7EB] rounded-[12px] hover:shadow-md transition">
-
-        {/* TOP */}
-        <div className="flex items-center justify-between">
-
-          <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 flex items-center justify-center text-white rounded-full ${danger ? "bg-red-500" : "bg-blue-500"}`}>
-              {item.name.slice(0, 2).toUpperCase()}
-            </div>
-
-            <div>
-              <p className="text-[14px] font-semibold">{item.name}</p>
-              <p className="text-[12px] text-gray-400">
-                {item.phone} · {item.dateText}
-              </p>
-            </div>
+  return (
+    <div className="pb-24 lg:pb-10 min-h-screen transition-colors duration-500 dark:text-white">
+      <section className="px-4">
+        <div className='container flex flex-col md:flex-row items-center justify-between py-6 gap-6'>
+          <div className='flex gap-2 items-center'>
+            <h1 className='text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic'>Ogohlantirishlar</h1>
+            <div className="w-1 h-1 rounded-full bg-indigo-500"></div>
+            <h2 className='text-xs font-bold text-slate-400 uppercase tracking-widest'>Overview</h2>
           </div>
-
-          <div className={`text-[14px] font-bold ${danger ? "text-red-500" : "text-[#111827]"}`}>
-            {item.amount}
+          
+          <div className='flex gap-4 items-center w-full md:w-auto'>
+            <div className="flex-1 md:w-[300px] h-11 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center px-4 bg-white dark:bg-slate-950 shadow-sm focus-within:border-indigo-500 transition-all">
+              <Search className="w-4 h-4 text-slate-400 mr-2" />
+              <input 
+                type="text" 
+                placeholder="Qidirish..." 
+                className="w-full h-full outline-none text-sm bg-transparent"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+            <button className='border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 rounded-xl shadow-sm'><Bell className="text-indigo-500" size={20} /></button>
+            <span className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-white text-xs font-black shadow-lg">SM</span>
           </div>
-
         </div>
+      </section>
+      <hr className='border-slate-100 dark:border-slate-800' />
 
-        {/* ACTIONS */}
-        <div className="flex flex-wrap items-center gap-[10px]">
-
-          <button
-            onClick={() => this.openDatePicker(index, item.date)}
-            className="flex items-center gap-[5px] border border-[#E5E7EB] rounded-[10px] px-[10px] py-[6px] text-[12px]"
-          >
-            <Calendar size={14} />
-            Muddatni o‘zgartirish
-          </button>
-
-          <button
-            onClick={() => this.handleCall(item.phone)}
-            className="flex items-center gap-[5px] border border-[#E5E7EB] rounded-[10px] px-[10px] py-[6px] text-[12px]"
-          >
-            <Phone size={14} />
-            Qo‘ng‘iroq
-          </button>
-
-          <button
-            onClick={() => this.handleTelegram(item.phone, item.name)}
-            className="flex items-center gap-[5px] border border-[#E5E7EB] rounded-[10px] px-[10px] py-[6px] text-[12px]"
-          >
-            <MessageSquare size={14} />
-            Telegram
-          </button>
-
-        </div>
-
-        {/* DATE EDIT */}
-        {editIndex === index && (
-          <div className="flex items-center gap-[10px] mt-[6px] flex-wrap">
-
-            <input
-              type="date"
-              value={selectedDate}
-              onChange={this.handleDateChange}
-              className="border border-[#E5E7EB] rounded-[8px] px-[10px] py-[6px] text-[12px]"
-            />
-
-            <button
-              onClick={() => this.saveDate(index)}
-              className="bg-[#2563EB] text-white px-[10px] py-[6px] rounded-[8px] text-[12px]"
-            >
-              Saqlash
-            </button>
-
-            <button
-              onClick={this.cancelEdit}
-              className="bg-gray-200 px-[10px] py-[6px] rounded-[8px] text-[12px]"
-            >
-              Bekor qilish
-            </button>
-
-          </div>
-        )}
-
-      </div>
-    )
-  }
-
-  render() {
-    const { loans } = this.state
-
-    const upcoming = loans.filter(l => l.type === "upcoming")
-    const overdue = loans.filter(l => l.type === "overdue")
-
-    return (
-      <div className="px-4 lg:px-6 pb-10 min-h-screen">
-
-        {/* ✅ YOUR NAVBAR (UNCHANGED) */}
-        <section>
-          <div className='container flex items-center justify-between'>
-            <div className='flex gap-[5px] items-center'>
-              <h1 className='text-[21px] font-bold'>Ogohlantirishlar</h1>
-              <h2 className='text-[14px] font-normal'>Overview</h2>
+      <section className='container px-4 mt-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+          
+          <div className='space-y-6'>
+            <div className='flex items-center justify-between'>
+                <div className='flex items-center gap-3'>
+                    <div className='w-8 h-8 rounded-lg bg-rose-500/10 text-rose-500 flex items-center justify-center'>
+                        <AlertTriangle size={18} strokeWidth={3} />
+                    </div>
+                    <h2 className='text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest'>Muddati o'tgan</h2>
+                </div>
+                <span className='px-3 py-1 bg-rose-500 text-white text-[10px] font-black rounded-full uppercase tracking-tighter shadow-lg shadow-rose-500/20'>
+                    {overdueFiltered.length} Active
+                </span>
             </div>
-            <div className='flex gap-[20px] items-center'>
-              <button className='border border-[#E5E7EB] bg-[#FFFFFF] p-[10px] rounded-[10px]'><a href="/alert"><Bell /></a></button>
-              <button><a href="/profile"><span className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#2563EB] to-[#06B6D4] flex items-center justify-center text-white text-[13px] font-bold">SM</span></a></button>
-            </div>
-          </div>
-        </section>
-        <hr className='mt-[12px]' />
 
-        {/* CONTENT */}
-        <section className='mt-[24px] grid grid-cols-1 lg:grid-cols-2 gap-[20px]'>
-
-          {/* UPCOMING */}
-          <div className='bg-white rounded-[16px] p-[16px] border border-[#E5E7EB]'>
-            <h2 className='font-semibold mb-[10px]'>Kelgusi to‘lovlar</h2>
-            <div className='space-y-[10px]'>
-              {upcoming.map((item, index) =>
-                this.renderLoanItem(item, index)
+            <div className='space-y-4'>
+              {overdueFiltered.length === 0 ? (
+                <div className='p-12 text-center bg-slate-50 dark:bg-slate-900/50 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800'>
+                  <p className='text-xs font-bold text-slate-400 uppercase tracking-widest opacity-50'>Hozircha muddati o'tgan qarzlar yo'q</p>
+                </div>
+              ) : (
+                overdueFiltered.map(item => (
+                  <div key={item.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-5 rounded-2xl shadow-sm hover:shadow-xl transition-all group overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-1 bg-rose-500 h-full"></div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-white text-xs font-black shadow-lg group-hover:scale-110 transition-transform">
+                          {item.name.substring(0, 2).toUpperCase()}
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-black text-slate-900 dark:text-white leading-tight uppercase tracking-tight">{item.name}</h4>
+                          <p className="text-[10px] font-bold text-rose-500 uppercase tracking-widest flex items-center gap-1 mt-0.5">
+                            <Clock size={10} /> Muddati o'tgan: {item.deadline}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-base font-black text-rose-600 dark:text-rose-400 tracking-tight">{item.loan_amount}</p>
+                        <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{item.phone_number}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 pt-4 border-t border-slate-50 dark:border-slate-800/50">
+                      <button 
+                        onClick={() => handleCall(item.phone_number)}
+                        className="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 active:scale-95 transition-all"
+                      >
+                        <Phone size={14} /> Qo'ng'iroq
+                      </button>
+                      <button 
+                        onClick={() => handleTelegram(item.phone_number, item.name)}
+                        className="flex-1 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 active:scale-95 transition-all"
+                      >
+                        <MessageSquare size={14} /> Telegram
+                      </button>
+                    </div>
+                  </div>
+                ))
               )}
             </div>
           </div>
 
-          {/* OVERDUE */}
-          <div className='bg-white rounded-[16px] p-[16px] border border-[#E5E7EB]'>
-            <h2 className='font-semibold text-red-500 mb-[10px]'>Muddati o‘tgan</h2>
-            <div className='space-y-[10px]'>
-              {overdue.map((item, index) =>
-                this.renderLoanItem(item, loans.indexOf(item))
+          <div className='space-y-6'>
+            <div className='flex items-center justify-between'>
+                <div className='flex items-center gap-3'>
+                    <div className='w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-500 flex items-center justify-center'>
+                        <Calendar size={18} strokeWidth={3} />
+                    </div>
+                    <h2 className='text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest'>Kelgusi to'lovlar</h2>
+                </div>
+                <span className='px-3 py-1 bg-indigo-500 text-white text-[10px] font-black rounded-full uppercase tracking-tighter shadow-lg shadow-indigo-500/20'>
+                    {upcomingFiltered.length} Soon
+                </span>
+            </div>
+
+            <div className='space-y-4'>
+              {upcomingFiltered.length === 0 ? (
+                <div className='p-12 text-center bg-slate-50 dark:bg-slate-900/50 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800'>
+                  <p className='text-xs font-bold text-slate-400 uppercase tracking-widest opacity-50'>Yaqin haftada to'lovlar yo'q</p>
+                </div>
+              ) : (
+                upcomingFiltered.map(item => (
+                  <div key={item.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-5 rounded-2xl shadow-sm hover:shadow-xl transition-all group overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-1 bg-indigo-500 h-full"></div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-white text-xs font-black shadow-lg group-hover:scale-110 transition-transform">
+                          {item.name.substring(0, 2).toUpperCase()}
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-black text-slate-900 dark:text-white leading-tight uppercase tracking-tight">{item.name}</h4>
+                          <p className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest flex items-center gap-1 mt-0.5">
+                            <Calendar size={10} /> Muddat: {item.deadline}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-base font-black text-slate-900 dark:text-white tracking-tight">{item.loan_amount}</p>
+                        <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{item.phone_number}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 pt-4 border-t border-slate-50 dark:border-slate-800/50">
+                      <button 
+                        onClick={() => handleCall(item.phone_number)}
+                        className="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 active:scale-95 transition-all"
+                      >
+                        <Phone size={14} /> Qo'ng'iroq
+                      </button>
+                      <button 
+                        onClick={() => handleTelegram(item.phone_number, item.name)}
+                        className="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 active:scale-95 transition-all"
+                      >
+                        <MessageSquare size={14} /> Telegram
+                      </button>
+                    </div>
+                  </div>
+                ))
               )}
             </div>
           </div>
-
-        </section>
-
-      </div>
-    )
-  }
+        </div>
+      </section>
+    </div>
+  );
 }

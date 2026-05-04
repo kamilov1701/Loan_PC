@@ -1,295 +1,353 @@
-// import React, { Component } from 'react'
-// import { Bell } from 'lucide-react';
-// import { Search } from "lucide-react";
-// import { Upload } from "lucide-react";
-// import { Camera } from "lucide-react";
-// import { User } from "lucide-react";
-// import { Plus } from "lucide-react";
-// import { ArrowLeft } from "lucide-react";
+import React, { useState, useEffect, useRef } from 'react';
+import { Bell, Search, Upload, Camera, User, Plus, ArrowLeft, X } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
+export default function NewLoanerC() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState({ name: "User", initials: "U" });
+  const fileInputRef = useRef(null);
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    loan_amount: '',
+    deadline: '',
+    start_date: new Date().toISOString().split('T')[0],
+    phone_number: '',
+    comment: '',
+    status: 'Active'
+  });
+  
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-// export default class NewLoanerC extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <section>
-//           <div className='container flex items-center justify-between'>
-//             <div className='flex gap-[5px] items-center'>
-//               <h1 className='text-[21px] font-bold'>Yangi qarzdorni qo'shish</h1>
-//               <h2 className='text-[14px] font-normal ml-[12px]'>Qarz oluvchi ma'lumotlarini to'ldiring</h2>
-//             </div>
-//             <div className='flex gap-[20px] items-center'>
-//               <button className='border border-[#E5E7EB] bg-[#FFFFFF] p-[10px] rounded-[10px]'><Bell /></button>
-//               <span className="w-[38px] h-[38px] rounded-full bg-gradient-to-br from-[#2563EB] to-[#06B6D4] flex items-center justify-center text-white text-[13px] font-bold">SM</span>
-//             </div>
+  useEffect(() => {
+    const session = localStorage.getItem("userSession");
+    if (session) {
+      try {
+        const userData = JSON.parse(session);
+        const name = userData.name || "User";
+        const initials = name.substring(0, 2).toUpperCase();
+        setUser({ ...userData, name, initials });
+      } catch (e) {
+        console.error("Session parse error", e);
+      }
+    }
+  }, []);
 
-//           </div>
-//         </section> <hr className='mt-[12px]' />
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-//         <section className='mt-[28px]'>
-//           <div>
-//             <div className=' bg-[#FFFFFF] border border-[#0000000A] shadow-[0_1px_3px_0_#0000000F] px-[24px] py-[29px] w-[1100px] rounded-[14px]'>
-//               <h2 className='text-[#6B7280] text-[17px] font-semibold uppercase'>Qarz oluvchi haqida yangi ma'lumot</h2>
-//               <div className='flex gap-[24px]'>
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size should not exceed 5MB");
+        return;
+      }
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.loan_amount || !formData.deadline) {
+      alert("Please fill in all required fields");
+      return;
+    }
 
-//                 <div>
-//                   <h2 className='text-[#111827] text-[18px] font-semibold mt-[10px]'>Rasm yuklash</h2>
-//                   <div className='border border-[#E5E7EB] w-[510px] h-[270px] text-center flex flex-col items-center justify-center py-[34px] bg-[#F4F6FA] mt-[8px] rounded-[12px]'>
-//                     <span className='flex flex-col items-center'>
-//                       <Upload className='text-[#9CA3AF] text-center mb-[10px]' size={36} />
-//                       <h2 className='text-[#111827] text-[15px] font-semibold '>Yuklang yoki suratga oling</h2>
-//                       <h3 className='text-[#9CA3AF] text-[15px] font-normal'>JPG, PNG · Maks. 5MB</h3>
-//                     </span>
-//                     <div className='flex gap-[10px] mt-[14px]'>
-//                       <button className="flex items-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[16px] py-[8px] text-[13px] font-semibold text-[#111827] w-[110px]">
-//                         <Upload size={26} className='text-[#9CA3AF]' />
-//                         Eksport
-//                       </button>
-//                       <button className="flex items-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[16px] py-[8px] text-[13px] font-semibold text-[#111827] w-[110px]">
-//                         <Camera size={26} className='text-[#9CA3AF]' />
-//                         Eksport
-//                       </button>
-//                     </div>
-//                   </div>
-//                   <div className='mt-[24px]'>
-//                     <label htmlFor="">
-//                       <p className='text-[#111827] text-[16px] font-semibold'>To'liq ism</p>
-//                       <input type="text" placeholder='Masalan: Anvar Karimov' className='py-[12px] px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-[510px] mt-[6px]' />
-//                     </label>
-//                     <label htmlFor="">
-//                       <p className='text-[#111827] text-[16px] font-semibold mt-[24px]'>Qarz summasi (so‘m)</p>
-//                       <input type="text" placeholder='1 000 000' className='py-[12px] px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-[510px] mt-[6px]' />
-//                     </label>
-//                     <label htmlFor="">
-//                       <p className='text-[#111827] text-[16px] font-semibold mt-[24px]'>Tugatish sanasi</p>
-//                       <input type="date" className='py-[12px] px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-[510px] mt-[6px]' />
-//                     </label>
-//                   </div>
+    setLoading(true);
+    const data = new FormData();
+    Object.keys(formData).forEach(key => data.append(key, formData[key]));
+    if (user.id) data.append('casser_id', user.id);
+    if (imageFile) {
+      data.append('image', imageFile);
+    }
 
-//                   <div className='flex gap-[10px] items-center mt-[24px]'>
-//                     <button className='bg-[#2563EB] text-[#FFFFFF] text-[15px] font-semibold rounded-[8px] flex gap-[6px] items-center py-[10px] px-[16px]'><Plus /> Qarzdor qo'shing</button>
-//                     <button className='bg-[#FFFFFF] text-[#111827] text-[15px] border-[#E5E7EB] border font-semibold rounded-[8px] flex gap-[6px] items-center py-[10px] px-[16px]'><ArrowLeft /> Bekor qilish</button>
-//                   </div>
-//                 </div>
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}add_loaner.php`, {
+        method: 'POST',
+        body: data,
+      });
+      const result = await response.json();
+      if (result.success) {
+        navigate('/list');
+      } else {
+        alert("Error: " + result.error);
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+      alert("Error connecting to server");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-//                 {/* Right Side */}
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
 
-//                 <div>
-//                   <h2 className='text-[#111827] text-[18px] font-semibold mt-[10px] mb-[8px]'>Suratni ko‘rish</h2>
-//                   <div>
-//                     <div className='flex flex-col items-center w-[510px] h-[270px] bg-[linear-gradient(135deg,#EFF6FF_0%,#DBEAFE_100%)] py-[72px] px-[65px] rounded-[14px] text-center'>
-//                       <User className='text-[#2563EB]' size={30} />
-//                       <h2 className='text-[#2563EB] text-[13px] font-semibold'>Suratni ko‘rish</h2>
-//                     </div>
-//                   </div>
-//                   <div className='mt-[24px]'>
-//                     <label htmlFor="">
-//                       <p className='text-[#111827] text-[16px] font-semibold'>Telefon raqami</p>
-//                       <input type="number" placeholder='+998' className='py-[12px] px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-[510px] mt-[6px]' />
-//                     </label>
-//                     <label htmlFor="">
-//                       <p className='text-[#111827] text-[16px] font-semibold mt-[24px]'>Boshlanish sanasi</p>
-//                       <input type="date" className='py-[12px] px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-[510px] mt-[6px]' />
-//                     </label>
-//                     <label htmlFor="">
-//                       <p className='text-[#111827] text-[16px] font-semibold mt-[24px]'>Ixtiyoriy izoh</p>
-//                       <input type="text" placeholder='Eslatma qoshing...' className='py-[12px] px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-[510px] mt-[6px]' />
-//                     </label>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-//       </div>
-//     )
-//   }
-// }
+  const startCamera = async () => {
+    setIsCameraOpen(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    } catch (err) {
+      console.error("Camera error:", err);
+      alert("Camera access denied");
+      setIsCameraOpen(false);
+    }
+  };
 
+  const stopCamera = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const tracks = videoRef.current.srcObject.getTracks();
+      tracks.forEach(track => track.stop());
+    }
+    setIsCameraOpen(false);
+  };
 
+  const capturePhoto = () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (video && canvas) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      const dataUrl = canvas.toDataURL('image/jpeg');
+      setImagePreview(dataUrl);
+      
+      fetch(dataUrl)
+        .then(res => res.blob())
+        .then(blob => {
+          const file = new File([blob], "camera_capture.jpg", { type: "image/jpeg" });
+          setImageFile(file);
+        });
+      
+      stopCamera();
+    }
+  };
 
-
-
-
-
-
-
-
-
-
-
-
-
-import React, { Component } from 'react'
-import { Bell, Search, Upload, Camera, User, Plus, ArrowLeft } from "lucide-react";
-
-export default class NewLoanerC extends Component {
-  render() {
-    return (
-      <div className="px-3 sm:px-4 lg:px-6 pb-20 lg:pb-6">
-
-        {/* Header */}
-        <section>
-          <div className='container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3'>
-
-            <div className='flex flex-col sm:flex-row sm:items-center gap-[5px]'>
-              <h1 className='text-[18px] sm:text-[21px] font-bold'>
-                Yangi qarzdorni qo'shish
-              </h1>
-              <h2 className='text-[12px] sm:text-[14px] font-normal sm:ml-[12px]'>
-                Qarz oluvchi ma'lumotlarini to'ldiring
-              </h2>
-            </div>
-
-            <div className='flex gap-[12px] sm:gap-[20px] items-center'>
-              <button className='border border-[#E5E7EB] bg-[#FFFFFF] p-[8px] sm:p-[10px] rounded-[10px]'>
-                <Bell size={18} />
-              </button>
-              <span className="w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] rounded-full bg-gradient-to-br from-[#2563EB] to-[#06B6D4] flex items-center justify-center text-white text-[12px] sm:text-[13px] font-bold">
-                SM
+  return (
+    <div className="px-3 sm:px-4 lg:px-6 pb-24 lg:pb-10 dark:text-white transition-colors duration-500">
+      <section className="px-4">
+        <div className='container flex flex-col sm:flex-row items-start sm:items-center justify-between py-6 gap-6'>
+          <div className='flex gap-2 items-center'>
+            <h1 className='text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase italic'>New Debtor</h1>
+            <div className="w-1 h-1 rounded-full bg-indigo-500"></div>
+            <h2 className='text-xs font-bold text-slate-400 uppercase tracking-widest'>Add Client</h2>
+          </div>
+          <div className='flex gap-4 items-center w-full md:w-auto justify-end'>
+            <button className='border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 rounded-xl shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors'>
+              <Bell size={20} className="text-slate-600 dark:text-slate-400" />
+            </button>
+            <div className="flex items-center gap-3">
+              <span className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center text-white text-xs font-black shadow-lg">
+                {user.initials}
               </span>
             </div>
-
           </div>
-        </section>
+        </div>
+      </section>
+      <hr className='border-slate-100 dark:border-slate-800' />
 
-        <hr className='mt-[12px]' />
+      <section className='container px-4 mt-8'>
+        <form onSubmit={handleSubmit} className='bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl p-8 md:p-10 rounded-[32px] max-w-[1000px] mx-auto'>
+          <h2 className='text-xs font-black text-slate-400 uppercase tracking-[0.25em] mb-10'>
+            Client Information
+          </h2>
 
-        {/* Form */}
-        <section className='mt-[28px]'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
+            <div className='space-y-6'>
+              <h3 className='text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight flex items-center gap-2'>
+                <Camera size={18} className="text-indigo-600" /> Profile Image
+              </h3>
 
-          <div className='bg-[#FFFFFF] border border-[#0000000A] shadow-[0_1px_3px_0_#0000000F] px-[16px] sm:px-[24px] py-[20px] sm:py-[29px] w-full max-w-[1100px] rounded-[14px]'>
-
-            <h2 className='text-[#6B7280] text-[15px] sm:text-[17px] font-semibold uppercase'>
-              Qarz oluvchi haqidagi ma'lumotlar
-            </h2>
-
-            <div className='flex flex-col lg:flex-row gap-[24px]'>
-
-              {/* LEFT */}
-              <div className='w-full lg:w-1/2'>
-
-                <h2 className='text-[#111827] text-[16px] sm:text-[18px] font-semibold mt-[10px]'>
-                  Rasm yuklash
-                </h2>
-
-                <div className='border border-[#E5E7EB] w-full h-[220px] sm:h-[270px] text-center flex flex-col items-center justify-center py-[20px] sm:py-[34px] bg-[#F4F6FA] mt-[8px] rounded-[12px]'>
-
-                  <span className='flex flex-col items-center'>
-                    <Upload className='text-[#9CA3AF] mb-[10px]' size={32} />
-                    <h2 className='text-[#111827] text-[13px] sm:text-[15px] font-semibold'>
-                      Yuklang yoki suratga oling
-                    </h2>
-                    <h3 className='text-[#9CA3AF] text-[12px] sm:text-[15px]'>
-                      JPG, PNG · Maks. 5MB
-                    </h3>
-                  </span>
-
-                  <div className='flex flex-col sm:flex-row gap-[10px] mt-[14px]'>
-                    <button className="flex items-center justify-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[12px] py-[8px] text-[12px] sm:text-[13px] font-semibold text-[#111827] w-full sm:w-[110px]">
-                      <Upload size={18} className='text-[#9CA3AF]' />
-                      Eksport
+              <div className='relative group'>
+                <div 
+                  className='border-2 border-dashed border-slate-200 dark:border-slate-800 w-full h-[280px] rounded-3xl flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-950/50 group hover:border-indigo-500 transition-all cursor-pointer relative overflow-hidden'
+                >
+                  {imagePreview ? (
+                    <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                  ) : (
+                    <div className='flex flex-col items-center group-hover:scale-110 transition-transform'>
+                      <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-sm mb-4 border border-slate-100 dark:border-slate-700">
+                        <Upload className='text-slate-400 group-hover:text-indigo-600' size={28} />
+                      </div>
+                      <p className='text-slate-900 dark:text-white text-xs font-black uppercase tracking-widest'>Upload or Camera</p>
+                    </div>
+                  )}
+                  
+                  <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <button 
+                      type="button" 
+                      onClick={() => fileInputRef.current.click()}
+                      className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-slate-900 shadow-lg hover:scale-110 transition-transform"
+                    >
+                      <Upload size={20} />
                     </button>
-
-                    <button className="flex items-center justify-center gap-[6px] border border-[#E5E7EB] rounded-[12px] px-[12px] py-[8px] text-[12px] sm:text-[13px] font-semibold text-[#111827] w-full sm:w-[110px]">
-                      <Camera size={18} className='text-[#9CA3AF]' />
-                      Kamera
+                    <button 
+                      type="button" 
+                      onClick={startCamera}
+                      className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform"
+                    >
+                      <Camera size={20} />
                     </button>
                   </div>
                 </div>
-
-                <div className='mt-[24px]'>
-
-                  <label>
-                    <p className='text-[#111827] text-[14px] sm:text-[16px] font-semibold'>
-                      To'liq ism
-                    </p>
-                    <input type="text" placeholder='Masalan: Anvar Karimov'
-                      className='py-[10px] sm:py-[12px] px-[12px] sm:px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-full mt-[6px]' />
-                  </label>
-
-                  <label>
-                    <p className='text-[#111827] text-[14px] sm:text-[16px] font-semibold mt-[24px]'>
-                      Qarz summasi (so‘m)
-                    </p>
-                    <input type="text" placeholder='1 000 000'
-                      className='py-[10px] sm:py-[12px] px-[12px] sm:px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-full mt-[6px]' />
-                  </label>
-
-                  <label>
-                    <p className='text-[#111827] text-[14px] sm:text-[16px] font-semibold mt-[24px]'>
-                      Tugatish sanasi
-                    </p>
-                    <input type="date"
-                      className='py-[10px] sm:py-[12px] px-[12px] sm:px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-full mt-[6px]' />
-                  </label>
-
-                </div>
-
-                <div className='flex flex-col sm:flex-row gap-[10px] items-stretch sm:items-center mt-[24px]'>
-
-                  <button className='bg-[#2563EB] text-[#FFFFFF] text-[14px] sm:text-[15px] font-semibold rounded-[8px] flex gap-[6px] items-center justify-center py-[10px] px-[16px] w-full sm:w-auto'>
-                    <Plus size={18} /> Qarzdor qo'shing
-                  </button>
-
-                  <button className='bg-[#FFFFFF] text-[#111827] text-[14px] sm:text-[15px] border-[#E5E7EB] border font-semibold rounded-[8px] flex gap-[6px] items-center justify-center py-[10px] px-[16px] w-full sm:w-auto'>
-                    <ArrowLeft size={18} /> Bekor qilish
-                  </button>
-
-                </div>
-
+                <input 
+                  type="file" 
+                  ref={fileInputRef} 
+                  className="hidden" 
+                  accept="image/*" 
+                  onChange={handleFileChange} 
+                />
               </div>
 
-              {/* RIGHT */}
-              <div className='w-full lg:w-1/2'>
-
-                <h2 className='text-[#111827] text-[16px] sm:text-[18px] font-semibold mt-[10px] mb-[8px]'>
-                  Suratni ko‘rish
-                </h2>
-
-                <div className='flex flex-col items-center w-full h-[220px] sm:h-[270px] bg-[linear-gradient(135deg,#EFF6FF_0%,#DBEAFE_100%)] py-[40px] sm:py-[72px] px-[20px] sm:px-[65px] rounded-[14px] text-center'>
-                  <User className='text-[#2563EB]' size={28} />
-                  <h2 className='text-[#2563EB] text-[12px] sm:text-[13px] font-semibold'>
-                    Suratni ko‘rish
-                  </h2>
+              <div className='space-y-6'>
+                <div>
+                  <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Full Name <span className="text-rose-500">*</span></label>
+                  <input 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    type="text" 
+                    required
+                    placeholder='Example: John Doe'
+                    className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-indigo-500 transition-all' 
+                  />
                 </div>
 
-                <div className='mt-[24px]'>
-
-                  <label>
-                    <p className='text-[#111827] text-[14px] sm:text-[16px] font-semibold'>
-                      Telefon raqami
-                    </p>
-                    <input type="number" placeholder='+998'
-                      className='py-[10px] sm:py-[12px] px-[12px] sm:px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-full mt-[6px]' />
-                  </label>
-
-                  <label>
-                    <p className='text-[#111827] text-[14px] sm:text-[16px] font-semibold mt-[24px]'>
-                      Boshlanish sanasi
-                    </p>
-                    <input type="date"
-                      className='py-[10px] sm:py-[12px] px-[12px] sm:px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-full mt-[6px]' />
-                  </label>
-
-                  <label>
-                    <p className='text-[#111827] text-[14px] sm:text-[16px] font-semibold mt-[24px]'>
-                      Ixtiyoriy izoh
-                    </p>
-                    <input type="text" placeholder='Eslatma qoshing...'
-                      className='py-[10px] sm:py-[12px] px-[12px] sm:px-[15px] border border-[#E5E7EB] rounded-[8px] bg-[#ffffff] w-full mt-[6px]' />
-                  </label>
-
+                <div>
+                  <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Amount (UZS) <span className="text-rose-500">*</span></label>
+                  <input 
+                    name="loan_amount"
+                    value={formData.loan_amount}
+                    onChange={handleInputChange}
+                    type="number" 
+                    required
+                    placeholder='0'
+                    className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-black text-slate-900 dark:text-white outline-none focus:border-indigo-500 transition-all' 
+                  />
                 </div>
-
               </div>
+            </div>
 
+
+            <div className='space-y-6'>
+              <h3 className='text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight flex items-center gap-2'>
+                <User size={18} className="text-indigo-600" /> Additional Details
+              </h3>
+
+              <div className='space-y-6'>
+                <div>
+                  <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Phone Number</label>
+                  <input 
+                    name="phone_number"
+                    value={formData.phone_number}
+                    onChange={handleInputChange}
+                    type="tel" 
+                    placeholder='+998 90 123 45 67'
+                    className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-indigo-500 transition-all' 
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Start Date</label>
+                    <input 
+                      name="start_date"
+                      value={formData.start_date}
+                      onChange={handleInputChange}
+                      type="date" 
+                      className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-4 py-4 text-xs font-bold text-slate-900 dark:text-white outline-none focus:border-indigo-500 transition-all' 
+                    />
+                  </div>
+                  <div>
+                    <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Deadline <span className="text-rose-500">*</span></label>
+                    <input 
+                      name="deadline"
+                      value={formData.deadline}
+                      onChange={handleInputChange}
+                      type="date" 
+                      required
+                      className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-4 py-4 text-xs font-bold text-slate-900 dark:text-white outline-none focus:border-indigo-500 transition-all' 
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className='text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block ml-1'>Comment (Optional)</label>
+                  <textarea 
+                    name="comment"
+                    value={formData.comment}
+                    onChange={handleInputChange}
+                    rows="4"
+                    placeholder='Additional details...'
+                    className='w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 rounded-2xl px-6 py-4 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-indigo-500 transition-all resize-none' 
+                  ></textarea>
+                </div>
+              </div>
             </div>
           </div>
 
-        </section>
-      </div>
-    )
-  }
+          <div className='flex flex-col sm:flex-row gap-4 mt-12 pt-8 border-t border-slate-50 dark:border-slate-800/50'>
+            <button 
+              type="submit"
+              disabled={loading}
+              className='flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black uppercase tracking-widest rounded-2xl flex gap-3 items-center justify-center py-5 px-8 shadow-xl shadow-indigo-500/20 transition-all active:scale-95 disabled:opacity-50'
+            >
+              {loading ? "Adding..." : <><Plus size={20} /> Add Debtor</>}
+            </button>
+            <button 
+              type="button"
+              onClick={() => navigate(-1)}
+              className='flex-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-black uppercase tracking-widest rounded-2xl flex gap-3 items-center justify-center py-5 px-8 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all'
+            >
+              <ArrowLeft size={20} /> Cancel
+            </button>
+          </div>
+        </form>
+      </section>
+
+
+      {isCameraOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="relative max-w-lg w-full bg-slate-900 rounded-[40px] overflow-hidden shadow-2xl border border-white/10">
+            <div className="p-10 flex flex-col items-center">
+              <div className="flex items-center justify-between w-full mb-8">
+                <h3 className="text-white text-xs font-black uppercase tracking-[0.25em]">Live Camera</h3>
+                <button onClick={stopCamera} className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors">
+                  <X size={20} />
+                </button>
+              </div>
+              
+              <div className="w-full aspect-square bg-black rounded-3xl overflow-hidden mb-8 shadow-inner">
+                <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" />
+              </div>
+
+              <div className="flex gap-4 w-full">
+                <button 
+                  onClick={capturePhoto}
+                  className="flex-1 bg-white text-slate-950 text-xs font-black uppercase tracking-widest py-5 rounded-2xl shadow-xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3"
+                >
+                  <Camera size={20} /> Capture Photo
+                </button>
+              </div>
+            </div>
+            <canvas ref={canvasRef} className="hidden" />
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
